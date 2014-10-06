@@ -1,0 +1,41 @@
+{
+  "name": "react-choices",
+  "version": "0.0.1",
+  "description": "Simple react component for create choices divided by steps",
+  "main": "dist/react-choices.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com:MateusZitelli/react-choices.git"
+  },
+  "keywords": [
+    "react-component",
+    "form",
+    "react"
+  ],
+  "author": "Mateus Zitelli <zitellimateus@gmail.com>",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/MateusZitelli/react-choices/issues"
+  },
+  "jest": {
+    "scriptPreprocessor": "./utils/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "./node_modules/react"
+    ],
+    "testFileExtensions": [
+      "js",
+      "jsx"
+    ]
+  },
+  "homepage": "https://github.com/MateusZitelli/react-choices",
+  "devDependencies": {
+    "jest": "^0.1.37",
+    "jest-cli": "^0.1.18",
+    "react": "^0.11.2",
+    "react-tools": "^0.11.2",
+    "webpack": "^1.4.4"
+  }
+}
