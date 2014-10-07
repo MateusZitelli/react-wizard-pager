@@ -4,7 +4,7 @@
 
 'use strict';
 
-var React = require('React');
+var React = require('react');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var merge = require('../utils/merge.js');
@@ -14,7 +14,8 @@ var Content = require('./Content.jsx');
 
 var Choices = React.createClass({
   propTypes: {
-    structure: React.PropTypes.object.isRequired
+    structure: React.PropTypes.object.isRequired,
+    backText: React.PropTypes.string.isRequired
   },
 
   getInitialState() {
@@ -24,19 +25,39 @@ var Choices = React.createClass({
     };
   },
 
+  _handleBack() {
+    var previews = this.state.previews;
+
+    this.setState({
+      activeSection: previews[previews.length - 1],
+      previews: previews.slice(0, previews.length - 1)
+    });
+  },
+
+  _handleOptionClick(i, e) {
+    this.setState({
+      previews: this.state.previews.concat(this.state.activeSection),
+      activeSection: this.state.activeSection.options[i]
+    });   
+  },
+
   render() {
     // Copy the props to prevent the original intact
+
     return (
       <div className="Choices">
-        <header>
+        {/*<header>
           {this.props.structure.title}
-        </header>
+        </header>*/}
 
-        <Navigation onClickBack={this._handleBack}
+        <Navigation backText={this.props.backText}
+                    onClickBack={this._handleBack}
+                    actual={this.state.activeSection}
                     history={this.state.previews} />
 
         <ReactCSSTransitionGroup transitionName="sections">
-          <Content section={this.state.activeSection} />
+          <Content onClickOption={this._handleOptionClick}
+                   section={this.state.activeSection} />
         </ReactCSSTransitionGroup>
       </div>
     );
