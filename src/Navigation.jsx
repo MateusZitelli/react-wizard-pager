@@ -28,7 +28,7 @@ var Navigation = React.createClass({
         {this.props.backText}
       </button>
     );
-
+    
     var actualTitle = (
       <li className="navigation-item actual">
         {this.props.actual.title} 

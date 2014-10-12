@@ -12,8 +12,8 @@ describe("Choices", () => {
       TU,
       Choices;
 
-  var getChoiceInstanceFrom = (obj) =>
-    TU.renderIntoDocument(<Choices structure={obj} />);
+  var getChoiceInstanceFrom = (obj, callback) =>
+    TU.renderIntoDocument(<Choices structure={obj} onChange={callback} />);
 
   beforeEach(() => {
     React = require('react/addons');
@@ -25,16 +25,36 @@ describe("Choices", () => {
     expect(!!Choices).toBeTruthy;
   }); 
 
-  it('show main title', () => {
+  // it('show main title', () => {
+  //   var structure = {
+  //     title: 'My custom title',
+  //     options: []
+  //   };
+
+  //   var instance = getChoiceInstanceFrom(structure);
+  //   var headerText = TU.findRenderedDOMComponentWithTag(instance, 'header')
+  //     .getDOMNode().textContent;
+
+  //   expect(headerText).toBe(structure.title);
+  // });
+
+  it('call the callback when change', () => {
     var structure = {
-      title: 'My custom title',
-      options: []
+      title: 'Example',
+      options:[
+        {
+          title: 't1',
+          options: []
+        } 
+      ] 
     };
+    var fn = jest.genMockFunction();
 
-    var instance = getChoiceInstanceFrom(structure);
-    var headerText = TU.findRenderedDOMComponentWithTag(instance, 'header')
-      .getDOMNode().textContent;
+    var instance = getChoiceInstanceFrom(structure, fn);
+    var links = TU
+      .scryRenderedDOMComponentsWithClass(instance, 'option-link');
 
-    expect(headerText).toBe(structure.title);
+    TU.Simulate.click(links[0]);
+    expect(fn).toBeCalled();
   });
 });

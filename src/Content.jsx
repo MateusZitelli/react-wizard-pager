@@ -11,9 +11,14 @@ var ClassName = React.createClass({
   },
 
   render() {
+    var props = this.props;
+    var onClick = (i) => { 
+      return !!props.onClickOption ? props.onClickOption.bind(null, i) : null;
+    }
+
     var optionItems = this.props.section.options.map((option, i) => 
       <li key={i} className="option-item">
-        <a onClick={this.props.onClickOption.bind(null, i)}
+        <a onClick={onClick(i)}
            href="#"
            className="option-link">
           {option.title}

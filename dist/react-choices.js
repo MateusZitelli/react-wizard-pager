@@ -74,14 +74,29 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Choices = React.createClass({displayName: 'Choices',
 	  propTypes: {
 	    structure: React.PropTypes.object.isRequired,
-	    backText: React.PropTypes.string.isRequired
+	    backText: React.PropTypes.string.isRequired,
+	    finalPage: React.PropTypes.renderable,
+	    onChange: React.PropTypes.func
 	  },
 	
 	  getInitialState:function() {
 	    return {
 	      previews: [],
-	      activeSection: this.props.structure
+	      activeSection: this.props.structure,
+	      finalPage: null
 	    };
+	  },
+	
+	  _updateFinalPage:function(activeSection) {
+	    if(activeSection.options.length === 0 && !!this.props.finalPage){
+	      this.setState({
+	        finalPage: this.props.finalPage
+	      });
+	    }else{
+	      this.setState({
+	        finalPage: null
+	      });
+	    }
 	  },
 	
 	  _handleBack:function() {
@@ -91,18 +106,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	      activeSection: previews[previews.length - 1],
 	      previews: previews.slice(0, previews.length - 1)
 	    });
+	    
+	    this._updateFinalPage(previews[previews.length - 1]);
+	
+	    if(!!this.props.onChange)
+	      this.props.onChange(this.state);
 	  },
 	
 	  _handleOptionClick:function(i, e) {
 	    this.setState({
 	      previews: this.state.previews.concat(this.state.activeSection),
 	      activeSection: this.state.activeSection.options[i]
-	    });   
+	    });
+	
+	    this._updateFinalPage(this.state.activeSection.options[i]);
+	
+	    if(!!this.props.onChange)
+	      this.props.onChange(this.state);
 	  },
 	
 	  render:function() {
-	    // Copy the props to prevent the original intact
-	
 	    return (
 	      React.DOM.div({className: "Choices"}, 
 	        /*<header>
@@ -116,7 +139,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        ReactCSSTransitionGroup({transitionName: "sections"}, 
 	          Content({onClickOption: this._handleOptionClick, 
-	                   section: this.state.activeSection})
+	                   section: this.state.activeSection}), 
+	          this.state.finalPage
 	        )
 	      )
 	    );
@@ -172,7 +196,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.props.backText
 	      )
 	    );
-	
+	    
 	    var actualTitle = (
 	      React.DOM.li({className: "navigation-item actual"}, 
 	        this.props.actual.title
@@ -215,14 +239,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	
 	  render:function() {
+	    var props = this.props;
+	    var onClick = function(i)  { 
+	      return !!props.onClickOption ? props.onClickOption.bind(null, i) : null;
+	    }
+	
 	    var optionItems = this.props.section.options.map(function(option, i)  
 	      {return React.DOM.li({key: i, className: "option-item"}, 
-	        React.DOM.a({onClick: this.props.onClickOption.bind(null, i), 
+	        React.DOM.a({onClick: onClick(i), 
 	           href: "#", 
 	           className: "option-link"}, 
 	          option.title
 	        )
-	      );}.bind(this)
+	      );}
 	    );
 	
 	    return (

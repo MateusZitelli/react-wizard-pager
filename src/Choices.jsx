@@ -15,14 +15,29 @@ var Content = require('./Content.jsx');
 var Choices = React.createClass({
   propTypes: {
     structure: React.PropTypes.object.isRequired,
-    backText: React.PropTypes.string.isRequired
+    backText: React.PropTypes.string.isRequired,
+    finalPage: React.PropTypes.renderable,
+    onChange: React.PropTypes.func
   },
 
   getInitialState() {
     return {
       previews: [],
-      activeSection: this.props.structure
+      activeSection: this.props.structure,
+      finalPage: null
     };
+  },
+
+  _updateFinalPage(activeSection) {
+    if(activeSection.options.length === 0 && !!this.props.finalPage){
+      this.setState({
+        finalPage: this.props.finalPage
+      });
+    }else{
+      this.setState({
+        finalPage: null
+      });
+    }
   },
 
   _handleBack() {
@@ -32,18 +47,26 @@ var Choices = React.createClass({
       activeSection: previews[previews.length - 1],
       previews: previews.slice(0, previews.length - 1)
     });
+    
+    this._updateFinalPage(previews[previews.length - 1]);
+
+    if(!!this.props.onChange)
+      this.props.onChange(this.state);
   },
 
   _handleOptionClick(i, e) {
     this.setState({
       previews: this.state.previews.concat(this.state.activeSection),
       activeSection: this.state.activeSection.options[i]
-    });   
+    });
+
+    this._updateFinalPage(this.state.activeSection.options[i]);
+
+    if(!!this.props.onChange)
+      this.props.onChange(this.state);
   },
 
   render() {
-    // Copy the props to prevent the original intact
-
     return (
       <div className="Choices">
         {/*<header>
@@ -58,6 +81,7 @@ var Choices = React.createClass({
         <ReactCSSTransitionGroup transitionName="sections">
           <Content onClickOption={this._handleOptionClick}
                    section={this.state.activeSection} />
+          {this.state.finalPage}
         </ReactCSSTransitionGroup>
       </div>
     );

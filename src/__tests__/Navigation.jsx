@@ -12,8 +12,8 @@ describe("Navigation", () => {
       TU,
       Navigation;
 
-  var getChoiceInstanceFrom = (obj) =>
-    TU.renderIntoDocument(<Navigation history={obj} />);
+  var getChoiceInstanceFrom = (obj, act) =>
+    TU.renderIntoDocument(<Navigation history={obj} actual={act} />);
 
   beforeEach(() => {
     React = require('react/addons');
@@ -31,14 +31,15 @@ describe("Navigation", () => {
       {
         title: 'section0',
         options: []
-      },
-      {
-        title: 'section1',
-        options: []
-      },
+      }
     ];
 
-    var instance = getChoiceInstanceFrom(navigationLinksData);
+    var actualData =  {
+      title: 'section1',
+      options: []
+    };
+
+    var instance = getChoiceInstanceFrom(navigationLinksData, actualData);
     var navigationLinks = TU
       .scryRenderedDOMComponentsWithClass(instance, 'navigation-item');
 

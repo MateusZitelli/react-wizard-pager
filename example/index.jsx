@@ -24,12 +24,19 @@ var structure = {
       ]
     },
   ]
-}
+};
+
+var showStatus = function (status) {
+  console.log(status);
+};
 
 var Example = React.createClass({
   render: function(){
     return (
-      <Choices backText="voltar" structure={structure}/>
+      <Choices backText="voltar"
+               finalPage={<h1>Some nice content</h1>}
+               onChange={showStatus}
+               structure={structure }/>
     );
   }
 });
