@@ -1,0 +1,112 @@
+@import url(http://fonts.googleapis.com/css?family=Gentium+Basic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+  background-color: #333333;
+  color: #dedede;
+  font-family: 'Gentium Basic', serif;
+  margin: 8px;
+}
+
+h1, h2{
+ font-family: 'Open Sans', sans-serif;
+ text-align: center;
+ text-transform: uppercase;
+}
+
+.navigation-history{
+  padding: 0 5%;
+}
+
+button.button-back{
+  background-color: #09A1B2;
+  border: none;
+  border-radius: 5px;
+  color: #DEDEDE;
+  display: inline-block;
+  font-size: 16px;
+  height: 32px;
+  margin: 10px;
+  position: relative;
+  top: -4px;
+}
+
+ul.navigation-list{
+  display: inline-block;
+  font-size: 32px;
+  padding: 10px;
+  margin: 5px 0 10px 0 ;
+  text-transform: uppercase;
+}
+
+li.navigation-item{
+  display: inline;
+  width: 50%;
+}
+
+li.navigation-item.actual{
+  text-decoration: underline;
+}
+
+li.navigation-item:after{
+  content: ' > ';
+}
+
+li.navigation-item:last-child:after{
+  content: '';
+}
+
+ul.options-list{
+  list-style: none;
+  margin: 0 5%;
+  padding: 0;
+}
+
+li.option-item{
+  width: 25%;
+  display: inline-block;
+}
+
+a.option-link{
+  color: #555555;
+  text-align: center;
+  text-decoration: none;
+}
+
+a.option-link:visited{
+  color: #555555;
+}
+
+.option-image{
+  width: 100%;
+}
+
+.link-content{
+  transition: all 0.4s ease-in-out;
+  margin: 10px 10px;
+  background-color: #FF9140;
+  padding: 10px;
+}
+
+.link-content:hover{
+  box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.4);
+  background: #FFA059;
+}
+
+.final-step{
+  border: 1px solid #DEDEDE;
+  border-radius: 5px;
+  margin: 0 30%;
+  text-align: center;
+}
+
+button.send{
+  background-color: #09A1B2;
+  border: none;
+  border-radius: 5px;
+  color: #DEDEDE;
+  display: inline-block;
+  font-size: 16px;
+  height: 32px;
+  margin: 10px;
+}

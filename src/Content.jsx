@@ -21,7 +21,7 @@ var ClassName = React.createClass({
         <a onClick={onClick(i)}
            href="#"
            className="option-link">
-          {option.title}
+           {option.content ? option.content : option.title}
         </a>
       </li>
     );
