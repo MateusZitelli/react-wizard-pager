@@ -1,6 +1,8 @@
 #React-choices
 > Simple React.js component for create custom products.
 
+[Example](https://mateuszitelli.github.io/react-choices/)
+
 ##Instructions
 ```sh
 npm install
