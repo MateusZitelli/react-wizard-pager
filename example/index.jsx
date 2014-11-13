@@ -89,7 +89,7 @@ var Example = React.createClass({
     );
 
     return (
-      <Choices backText="voltar"
+      <WizardPager backText="voltar"
         finalPage={sendComponent}
         onChange={showStatus}
         structure={structure}/>

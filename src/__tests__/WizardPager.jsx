@@ -7,22 +7,22 @@
 jest.autoMockOff();
 
 
-describe("Choices", () => {
+describe("WizardPager", () => {
   var React,
       TU,
-      Choices;
+      WizardPager;
 
   var getChoiceInstanceFrom = (obj, callback) =>
-    TU.renderIntoDocument(<Choices structure={obj} onChange={callback} />);
+    TU.renderIntoDocument(<WizardPager structure={obj} onChange={callback} />);
 
   beforeEach(() => {
     React = require('react/addons');
     TU = React.addons.TestUtils;
-    Choices = require('../Choices.jsx');
+    WizardPager = require('../WizardPager.jsx');
   });
 
   it('be requirable', () => {
-    expect(!!Choices).toBeTruthy;
+    expect(!!WizardPager).toBeTruthy;
   }); 
 
   // it('show main title', () => {

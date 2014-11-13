@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-  entry: __dirname + "/src/Choices.jsx",
+  entry: __dirname + "/src/WizardPager.jsx",
   output: {
     path: __dirname + '/dist',
-    filename: 'react-choices.js',
-    library: 'Choices',
+    filename: 'react-wizard-pager.js',
+    library: 'WizardPager',
     libraryTarget: 'umd'
   },
   externals: {

@@ -12,7 +12,7 @@ var merge = require('../utils/merge.js');
 var Navigation = require('./Navigation.jsx');
 var Content = require('./Content.jsx');
 
-var Choices = React.createClass({
+var WizardPager = React.createClass({
   propTypes: {
     structure: React.PropTypes.object.isRequired,
     backText: React.PropTypes.string.isRequired,
@@ -68,7 +68,7 @@ var Choices = React.createClass({
 
   render() {
     return (
-      <div className="Choices">
+      <div className="wizard-pager">
         {/*<header>
           {this.props.structure.title}
         </header>*/}
@@ -88,4 +88,4 @@ var Choices = React.createClass({
   },
 });
 
-module.exports = Choices;
+module.exports = WizardPager;
